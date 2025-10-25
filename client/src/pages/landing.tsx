@@ -351,15 +351,15 @@ export default function Landing() {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
-                  support@servicekart.com
+                  servicekartmvp@gmail.com
                 </li>
                 <li className="flex items-center gap-2">
                   <Phone className="w-4 h-4" />
-                  +91 1800-SERVICE
+                  +91 9798820430
                 </li>
                 <li className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
-                  Mumbai, India
+                  Latehar, Jharkhand, India
                 </li>
               </ul>
             </div>
