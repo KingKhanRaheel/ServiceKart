@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -23,8 +24,10 @@ import {
   Mail
 } from "lucide-react";
 import heroImage from '@assets/generated_images/Service_professionals_at_work_ebdaf5c3.png';
+import { AuthDialog } from "@/components/AuthDialog";
 
 export default function Landing() {
+  const [showAuthDialog, setShowAuthDialog] = useState(false);
   const serviceCategories = [
     { name: "Plumbing", icon: Wrench, description: "Expert plumbers for all your water and pipe needs" },
     { name: "Electrical", icon: Bolt, description: "Certified electricians for safe installations" },
@@ -110,7 +113,7 @@ export default function Landing() {
                 <Button 
                   size="lg" 
                   className="gap-2 hover-elevate active-elevate-2" 
-                  onClick={() => window.location.href = '/api/login'}
+                  onClick={() => setShowAuthDialog(true)}
                   data-testid="button-register-buyer"
                 >
                   Register as Buyer
@@ -309,7 +312,7 @@ export default function Landing() {
             <Button 
               size="lg" 
               className="gap-2 hover-elevate active-elevate-2"
-              onClick={() => window.location.href = '/api/login'}
+              onClick={() => setShowAuthDialog(true)}
               data-testid="button-cta-buyer"
             >
               Find Service Providers
@@ -341,8 +344,8 @@ export default function Landing() {
             <div>
               <h4 className="font-semibold mb-4 text-foreground">Quick Links</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><button onClick={() => window.location.href = '/api/login'} className="hover:text-primary transition-colors" data-testid="link-about">About Us</button></li>
-                <li><button onClick={() => window.location.href = '/api/login'} className="hover:text-primary transition-colors" data-testid="link-services">Services</button></li>
+                <li><button onClick={() => setShowAuthDialog(true)} className="hover:text-primary transition-colors" data-testid="link-about">About Us</button></li>
+                <li><button onClick={() => setShowAuthDialog(true)} className="hover:text-primary transition-colors" data-testid="link-services">Services</button></li>
                 <li><button onClick={() => window.location.href = '/register-seller'} className="hover:text-primary transition-colors" data-testid="link-become-seller">Become a Seller</button></li>
               </ul>
             </div>
@@ -369,6 +372,8 @@ export default function Landing() {
           </div>
         </div>
       </footer>
+
+      <AuthDialog open={showAuthDialog} onOpenChange={setShowAuthDialog} />
     </div>
   );
 }
