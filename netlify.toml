@@ -1,45 +1,20 @@
-# Netlify configuration for ServiceKart deployment
-
 [build]
-  # Build command - install dependencies and build the application
-  command = "npm install && npm run build"
-  # Directory where the build output is located
-  publish = "dist"
-  
-[build.environment]
-  # Node version
-  NODE_VERSION = "20"
+  publish = "dist/public"
+  command = "npm run build"
 
-# Redirect all server requests to the Express backend
+[build.environment]
+  NODE_VERSION = "18"
+
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/server/:splat"
+  to = "/.netlify/functions/:splat"
   status = 200
 
-# SPA fallback - serve index.html for all non-API routes
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Function configuration for serverless backend
 [functions]
-  # Directory containing serverless functions
-  directory = "dist"
-  # Node version for functions
+  directory = "netlify/functions"
   node_bundler = "esbuild"
-
-# Headers for security and performance
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    X-XSS-Protection = "1; mode=block"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-
-# Cache static assets
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
